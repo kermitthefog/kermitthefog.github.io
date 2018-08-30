@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <title>WebBluetooth Puck</title>
+    <style>
+      body{font-family:sans-serif;font-size:20px;color:#333333;}
+	    p{font-size:16px;}
+      h1{font-size:32px;}
+      label{display:block;margin-bottom:5px;}
+      input{font-size:20px;}
+      input[type="text"]{width:100%;padding:5px;}
+      .field{margin-bottom:20px;}
+      button{font-size:26px;}
+      #form-wrapper{width:300px;margin-left:auto;margin-right:auto;margin-top:100px;}
+      rect.panel{cursor: pointer; cursor: hand;}
+	    #start-button{cursor: pointer; cursor: hand;}    
+      #success-pucker{display:none;}
+      .data{display:none;}
+    </style>
+
+    <style>
+    body {
+      background-color: #ffffff;
+      font-family: "Helvetica", "Arial", sans-serif;
+    }
+
+    .blurb {
+      background-color: #f0f0f0;
+      border-radius: 0.75em;
+      display: block;
+      margin: 0.5em;
+      padding: 0.5em;
+    }
+        
+    .myButton {
+        -moz-box-shadow:inset 0px 1px 0px 0px #9fb4f2;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #9fb4f2;
+        width:50%;
+        box-shadow:inset 0px 1px 0px 0px #9fb4f2;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7892c2), color-stop(1, #476e9e));
+        background:-moz-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+        background:-webkit-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+        background:-o-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+        background:-ms-linear-gradient(top, #7892c2 5%, #476e9e 100%);
+        background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7892c2', endColorstr='#476e9e',GradientType=0);
+        background-color:#7892c2;
+        -moz-border-radius:6px;
+        -webkit-border-radius:6px;
+        border-radius:6px;
+        border:1px solid #4e6096;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        <!--font-family:Arial; -->
+        font-size:15px;
+        font-weight:bold;
+        padding:6px 24px;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #283966;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }
+        
+        
+    .Red {
+        -moz-box-shadow:inset 0px 1px 0px 0px #e67a73;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #e67a73;
+        box-shadow:inset 0px 1px 0px 0px #e67a73;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e4685d), color-stop(1, #eb675e));
+        background:-moz-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+        background:-webkit-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+        background:-o-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+        background:-ms-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+        background:linear-gradient(to bottom, #e4685d 5%, #eb675e 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e4685d', endColorstr='#eb675e',GradientType=0);
+        background-color:#e4685d;
+        border:1px solid #ffffff;
+        color:#ffffff;
+    }
+    .Green {
+        -moz-box-shadow:inset 0px 1px 0px 0px #9acc85;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #9acc85;
+        box-shadow:inset 0px 1px 0px 0px #9acc85;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #74ad5a), color-stop(1, #68a54b));
+        background:-moz-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+        background:-webkit-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+        background:-o-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+        background:-ms-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
+        background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#74ad5a', endColorstr='#68a54b',GradientType=0);
+        background-color:#74ad5a;
+        border:1px solid #3b6e22;
+        color:#ffffff;
+    }
+    .Purple {
+        -moz-box-shadow:inset 0px 1px 0px 0px #e184f3;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #e184f3;
+        box-shadow:inset 0px 1px 0px 0px #e184f3;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd));
+        background:-moz-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+        background:-webkit-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+        background:-o-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+        background:-ms-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+        background:linear-gradient(to bottom, #c123de 5%, #a20dbd 100%);
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd',GradientType=0);
+        background-color:#c123de;
+        border:1px solid #a511c0;
+        color:#ffffff;
+    }
+    </style>
+        
+	</head>
+	<body>
+
+        <div class="blurb">
+      <p>This example requires Web Bluetooth browser support and Puck.js</p>
+      <script>
+      <!--
+  document.write("<p><b>Note:</b> Web Bluetooth is  <b>" +
+    (navigator.bluetooth?'already enabled':'currently disabled')+
+    "</b> on this computer.</p>");
+  	-->
+      </script>
+    </div>    
+    <div>
+        <button type="button" class="myButton" id="button_reset">Reset</button>
+        <div>
+            info:
+            <div id="log" class="blurb">no messages</div>
+        </div>
+        <div><button type="button" class="myButton Purple" id="b00">0.00 off</button></div>
+        <div><button type="button" class="myButton Purple" id="b05">0.05</button></div>
+        <div><button type="button" class="myButton Purple" id="b07">0.07</button></div>
+        <div><button type="button" class="myButton Purple" id="b08">0.08</button></div>
+        <div><button type="button" class="myButton Purple" id="b10">0.10</button></div>     
+        <div><button type="button" class="myButton Purple" id="b13">0.13</button></div>
+        <div><button type="button" class="myButton Purple" id="b16">0.16</button></div>
+        <div><button type="button" class="myButton Purple" id="b18">0.18</button></div>
+        <div><button type="button" class="myButton Purple" id="b20">0.20</button></div>
+        <div><button type="button" class="myButton Purple" id="b22">0.22</button></div>
+        <div><button type="button" class="myButton Purple" id="b24">0.24</button></div>
+        <div><button type="button" class="myButton Purple" id="b30">0.30</button></div>
+        <div><button type="button" class="myButton Purple" id="b35">0.35</button></div>
+        <br>
+        <div><button type="button" class="myButton Red" id="b_f10_2">f10 .02 ok</button></div>
+        <div><button type="button" class="myButton Red" id="b_f10_3">f10 .03</button></div>
+        <div><button type="button" class="myButton Red" id="b_f10_5">f10 .05</button></div>
+        <div><button type="button" class="myButton Red" id="b_f10_7">f10 .07</button></div>
+        <div><button type="button" class="myButton Red" id="b_f10_10">f10 .10</button></div>
+        <br>
+        <div><button type="button" class="myButton Green" id="b_f100_3">f100 .03 ok</button></div>
+        <div><button type="button" class="myButton Green" id="b_f100_5">f100 .05</button></div>
+        <div><button type="button" class="myButton Green" id="b_f100_10">f100 .10</button></div>
+        <div><button type="button" class="myButton Green" id="b_f100_14">f100 .10</button></div>
+        <div><button type="button" class="myButton Green" id="b_f100_18">f100 .10</button></div>
+    </div>
+   
+    <script src="https://www.puck-js.com/puck.js"></script>
+    <script>    
+	
+    //digitalWrite(D1,0);
+    //digitalWrite(D2,0);
+        
+    //digitalWrite(D2,1);
+    //analogWrite(D1, 0.0, { freq : 5000} );
+    
+        
+    function setPWM(pct_duty, fr) {
+        return 'digitalWrite(D2,1);analogWrite(D1,'+pct_duty+',{freq:'+fr+'});\n';
+        //return 'digitalWrite(D2,1); analogWrite(LED1,'+pct_duty+',{freq:'+fr+'});\n';
+    }
+        
+    function writePWM(pct_duty,fr) {
+        log.innerHTML = setPWM(pct_duty,fr);
+        Puck.write(setPWM(pct_duty,fr));
+    }
+    
+    var pucker = {
+        'reset': function(){
+            Puck.write('reset();D1.write(0);\n');
+            log.innerHTML = 'reset();D1.write(0);\n';    
+        }
+    };
+
+    button_reset.addEventListener("click", pucker.reset);
+        
+    b00.addEventListener("click",function(){writePWM(0   ,5000)});
+    b05.addEventListener("click",function(){writePWM(0.05,5000)});
+    b07.addEventListener("click",function(){writePWM(0.07,5000)});
+    b08.addEventListener("click",function(){writePWM(0.08,5000)});
+    b10.addEventListener("click",function(){writePWM(0.10,5000)});
+    b13.addEventListener("click",function(){writePWM(0.13,5000)});
+    b16.addEventListener("click",function(){writePWM(0.16,5000)});
+    b18.addEventListener("click",function(){writePWM(0.18,5000)});
+    b20.addEventListener("click",function(){writePWM(0.20,5000)});
+    b22.addEventListener("click",function(){writePWM(0.22,5000)});
+    b24.addEventListener("click",function(){writePWM(0.24,5000)});
+    b30.addEventListener("click",function(){writePWM(0.30,5000)});
+    b35.addEventListener("click",function(){writePWM(0.35,5000)});
+
+    b_f10_2.addEventListener("click",function(){writePWM(0.02,10)});
+    b_f10_3.addEventListener("click",function(){writePWM(0.03,10)});
+    b_f10_5.addEventListener("click",function(){writePWM(0.05,10)});
+    b_f10_7.addEventListener("click",function(){writePWM(0.07,10)});
+    b_f10_10.addEventListener("click",function(){writePWM(0.10,10)});
+
+    b_f100_3.addEventListener("click",function(){writePWM(0.03,100)});
+    b_f100_5.addEventListener("click",function(){writePWM(0.05,100)});
+    b_f100_10.addEventListener("click",function(){writePWM(0.10,100)});
+    b_f100_14.addEventListener("click",function(){writePWM(0.14,100)});
+    b_f100_18.addEventListener("click",function(){writePWM(0.18,100)});
+</script>  
+     
+	</body>
+
+</html>
